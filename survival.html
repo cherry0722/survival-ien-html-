@@ -13,16 +13,19 @@
       color: white;
     }
     .container {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
     }
     .box {
       background-color: rgba(0, 0, 0, 0.85);
       padding: 40px;
       border-radius: 16px;
-      width: 340px;
+      width: 100%;
+      max-width: 360px;
       text-align: center;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
     }
@@ -72,27 +75,27 @@
     a:hover {
       color: #fff;
     }
-    nav {
-      text-align: center;
-      margin-top: 10px;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px;
-      border-bottom: 1px solid #444;
-    }
-    nav a {
-      margin: 0 12px;
-      color: #00bcd4;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
     section {
       display: none;
     }
     section.active {
       display: block;
+    }
+    #logoutBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 120px;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: white;
+      font-weight: bold;
+      border: 1px solid #888;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+      z-index: 1000;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -100,18 +103,39 @@
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (id === 'login' || id === 'register') {
+        logoutBtn.style.display = 'none';
+      } else {
+        logoutBtn.style.display = 'block';
+      }
+    }
+
+    function submitSighting() {
+      alert('Sighting submitted successfully!');
+      showSection('dashboard');
+    }
+
+    function postComment() {
+      alert('Comment posted!');
+      showSection('dashboard');
+    }
+
+    function confirmAlert() {
+      alert('Distress signal triggered!');
+      showSection('dashboard');
+    }
+
+    function sendResetLink() {
+      alert('Reset link sent to your email!');
+      showSection('login');
     }
   </script>
 </head>
 <body onload="showSection('login')">
-  <nav>
-    <a href="#" onclick="showSection('login')">Login</a>
-    <a href="#" onclick="showSection('reset')">Reset Password</a>
-    <a href="#" onclick="showSection('dashboard')">Dashboard</a>
-    <a href="#" onclick="showSection('submit')">Submit Sighting</a>
-    <a href="#" onclick="showSection('forum')">Forum</a>
-    <a href="#" onclick="showSection('alert')">Emergency Alert</a>
-  </nav>
+
+  <button id="logoutBtn" onclick="showSection('login')">Logout</button>
 
   <div class="container">
     <section id="login" class="box active">
@@ -133,7 +157,7 @@
     <section id="reset" class="box">
       <h1>Reset Password</h1>
       <input type="email" placeholder="Enter your registered email" />
-      <button>Send Reset Link</button>
+      <button onclick="sendResetLink()">Send Reset Link</button>
       <button onclick="showSection('login')">Back to Login</button>
     </section>
 
@@ -151,7 +175,7 @@
       <input type="text" placeholder="Date" />
       <input type="text" placeholder="Location" />
       <textarea placeholder="Constitution"></textarea>
-      <button>Submit</button>
+      <button onclick="submitSighting()">Submit</button>
     </section>
 
     <section id="forum" class="box">
@@ -160,13 +184,13 @@
       <p>- User1: I saw it!</p>
       <p>- User2: Around 8PM, right?</p>
       <textarea placeholder="Type your reply..."></textarea>
-      <button>Post Comment</button>
+      <button onclick="postComment()">Post Comment</button>
     </section>
 
     <section id="alert" class="box">
       <h1>Emergency Alert</h1>
       <p>Do you want to trigger a distress signal?</p>
-      <button>Confirm Alert</button>
+      <button onclick="confirmAlert()">Confirm Alert</button>
       <button onclick="showSection('dashboard')">Cancel</button>
     </section>
 
@@ -179,5 +203,6 @@
       <button onclick="showSection('login')">Back to Login</button>
     </section>
   </div>
+
 </body>
 </html>
