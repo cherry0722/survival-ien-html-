@@ -28,6 +28,7 @@
       max-width: 360px;
       text-align: center;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      position: relative;
     }
     h1 {
       font-size: 24px;
@@ -56,6 +57,19 @@
       cursor: pointer;
       margin-top: 10px;
       font-size: 14px;
+    }
+    .small-button {
+      width: auto;
+      padding: 6px 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid #888;
+      border-radius: 6px;
+      font-size: 12px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
     }
     .links, .footer-links {
       display: flex;
@@ -172,6 +186,7 @@
 
     <section id="submit" class="box">
       <h1>SUBMIT SIGHTING</h1>
+      <button class="small-button" onclick="showSection('dashboard')">Back</button>
       <input type="text" placeholder="Date" />
       <input type="text" placeholder="Location" />
       <textarea placeholder="Constitution"></textarea>
@@ -180,6 +195,7 @@
 
     <section id="forum" class="box">
       <h1>Community Forum</h1>
+      <button class="small-button" onclick="showSection('dashboard')">Back</button>
       <p><strong>Thread:</strong> UFO over Texas</p>
       <p>- User1: I saw it!</p>
       <p>- User2: Around 8PM, right?</p>
@@ -189,6 +205,7 @@
 
     <section id="alert" class="box">
       <h1>Emergency Alert</h1>
+      <button class="small-button" onclick="showSection('dashboard')">Back</button>
       <p>Do you want to trigger a distress signal?</p>
       <button onclick="confirmAlert()">Confirm Alert</button>
       <button onclick="showSection('dashboard')">Cancel</button>
